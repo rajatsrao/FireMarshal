@@ -366,6 +366,8 @@ def makeInitramfs(srcs, cpioDir, includeDevNodes=False):
     cpioDir: Scratch directory to produce outputs in
     includeDevNodes: If true, will include '/dev/console' and '/dev/tty' special files."""
 
+    print("makeInitramfs srcs = ", srcs)
+
     # Generate individual cpios for each source
     cpios = []
     for src in srcs:
@@ -529,6 +531,8 @@ def makeBin(config, nodisk=False):
                 initramfsIncludes += [wlutil.getOpt('initramfs-dir') / "nodisk"]
                 with wlutil.mountImg(config['img'], wlutil.getOpt('mnt-dir')):
                     initramfsIncludes += [wlutil.getOpt('mnt-dir')]
+                    # RR: Add custom rootfs path to add
+                    initramfsIncludes += [wlutil.getOpt('initramfs-dir') / "custom"]
                     # This must be done while in the mountImg context
                     initramfsPath = makeInitramfs(initramfsIncludes, cpioDir, includeDevNodes=True)
             else:

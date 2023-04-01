@@ -86,3 +86,14 @@ These scripts will have all the permissions your user has, be sure to read all w
 The master branch of this project contains the latest unstable version of FireMarshal.
 It should generally work correctly, but it may contain bugs or other inconsistencies from time to time.
 For stable releases, see the release git tags or GitHub releases page.
+
+```
+conda activate base
+source env.sh
+rvsw
+cd software/firemarshal/
+./marshal -v -d clean br-base.json
+./marshal -v -d build br-base.json
+./marshal -v -d install -t prototype br-base.json
+sudo dd if=br-base-bin-nodisk-flat of=/dev/sdb1
+```
